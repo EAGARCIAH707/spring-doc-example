@@ -1,7 +1,8 @@
 package com.andevs.springdoc.controller;
 
-import com.andevs.springdoc.model.error.NotFoundResponse;
 import com.andevs.springdoc.model.dto.ExampleDto;
+import com.andevs.springdoc.model.enums.TypeEnum;
+import com.andevs.springdoc.model.error.NotFoundResponse;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -87,4 +88,20 @@ public interface IExampleController {
       @Parameter(description = "Cantidad de items por pagina", example = "100")
           @RequestParam(name = "pageSize")
           Integer pageSize);
+
+  @Tag(
+      name = "Find example by name",
+      description = "Servicio utilizado para buscar un example por nombre")
+  @ApiResponses(
+      value = {
+        @ApiResponse(
+            description = "Cuando un example coincide con el nombre ingresado",
+            responseCode = "200",
+            content = @Content(schema = @Schema(implementation = ExampleDto.class))),
+        @ApiResponse(
+            description = "Cuando no encuentra ningun recurso",
+            responseCode = "404",
+            content = @Content(schema = @Schema(implementation = NotFoundResponse.class)))
+      })
+  ResponseEntity<ExampleDto> findByName(@PathVariable TypeEnum typeEnum);
 }

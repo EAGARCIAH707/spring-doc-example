@@ -1,5 +1,6 @@
 package com.andevs.springdoc.model.dto;
 
+import com.andevs.springdoc.model.enums.TypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -24,4 +25,6 @@ public class ExampleDto {
 
   @Schema(deprecated = true, description = "Este campo pronto dejará de usarse")
   private String deprecatedField;
+
+  private TypeEnum typeDoc;
 }
